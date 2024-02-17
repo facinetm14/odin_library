@@ -11,34 +11,39 @@
 <body>
     <header>
         <h1>Library</h1>
-        <div class="header-btn"><button type="button" id="add-book">add new book</button></div>
+        <div class="header-btn"><button type="button" id="add-book">new book</button></div>
     </header>
-    <div class="modal" id="add-book-modal">
+    <dialog onpen class="modal" id="add-book-modal">
         <div class="modal-title">
             <span>Fill in the new book info</span>
         </div>
-        <div class="modal-content">
-            <form action="" class="modal-content-form" id="add-book-form">
+        <form class="modal-form" id="add-book-form">
+            <div class="modal-content">
                 <div class="form-control">
-                    <label for="title">Title </label>
-                    <input type="text" name="title" id="title">
+                    <label for="title">Title* </label>
+                    <input type="text" class="input-txt" name="title" id="title">
                 </div>
                 <div class="form-control">
-                    <label for="author">Author </label>
-                    <input type="text" name="author" id="author">
+                    <label for="author">Author* </label>
+                    <input type="text" class="input-txt" name="author" id="author">
                 </div>
                 <div class="form-control">
-                    <label for="">Pages </label>
-                    <input type="number" name="pages" id="pages">
+                    <label for="pages">Pages* </label>
+                    <input type="number" class="input-txt" name="pages" id="pages">
                 </div>
-            </form>
-        </div>
-        <hr/>
-        <div class="modal-footer">
-            <button type="button" id="cancel">cancel</button>
-            <button type="button" id="save">save</button>
-        </div>
-    </div>
+                <div class="form-control">
+                    <label for="read_status">Did you read it ?
+                        <input type="checkbox" name="read_status" id="read_status">
+                    </label>
+                </div>
+            </div>
+            <hr />
+            <div class="modal-footer">
+                <button type="button" id="cancel">cancel</button>
+                <button type="button" id="save">save</button>
+            </div>
+        </form>
+    </dialog>
     <div class="container">
     </div>
 </body>

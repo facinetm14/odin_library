@@ -1,6 +1,6 @@
 "use strict";
 
-const BOOK_TITLE_BUFFER = 10;
+const BOOK_TEXT_BUFFER = 10;
 
 function readBook(_book, btnId) {
     const currentBookBtn = document.querySelector(`[data-id="${btnId}"]`);
@@ -17,9 +17,9 @@ function addBook(library, book) {
     library.push(book);
 }
 
-const formatBookTitle = (title) => {
-    if (title.length < BOOK_TITLE_BUFFER) return title;
-    return `${title.substring(0, BOOK_TITLE_BUFFER)}...`;
+const formatBookText = (title) => {
+    if (title.length < BOOK_TEXT_BUFFER) return title;
+    return `${title.substring(0, BOOK_TEXT_BUFFER)}...`;
 }
 
 const addNewElement = (parentTo, elementTag, elementContent, breakLine = -1, id = "") => {
@@ -31,6 +31,7 @@ const addNewElement = (parentTo, elementTag, elementContent, breakLine = -1, id 
         parentTo.appendChild(br);
     }
     if (elementTag == "button") element.classList.add('btn');
+    if (elementContent == "Delete") element.classList.add('btn-delete');
     if (id) element.setAttribute('data-id', id);
 }
 
@@ -38,11 +39,11 @@ const createBookComponent = (book) => {
     const div = document.createElement('div');
     div.classList.add('book');
     
-    addNewElement(div, 'h3', formatBookTitle(book.title));
+    addNewElement(div, 'h3', formatBookText(book.title));
     addNewElement(div, 'span', `${book.pages} pages`, 2);
     addNewElement(div, 'span', `By `);
-    addNewElement(div, 'strong', book.author, 2);
-    addNewElement(div, 'button', 'Read', 2, `readBook-${book.title}`);
+    addNewElement(div, 'strong', formatBookText(book.author), 2);
+    addNewElement(div, 'button', `${ book.isRead ? 'Read' : 'Unread' }`, 2, `readBook-${book.title}`);
     addNewElement(div, 'button', 'Delete', -1, `deleteBook-${book.title}`);
     return div;
 }
@@ -62,4 +63,5 @@ export {
     displayBooks,
     readBook,
     deleteBook,
+    addBook
 };

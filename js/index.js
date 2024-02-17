@@ -1,22 +1,23 @@
 'use strict';
 import { Book } from './book.js';
-import { displayBooks, readBook, deleteBook } from './library.js';
+import { displayBooks, readBook, deleteBook, addBook } from './library.js';
 
-const myLibrary = [];
-const container = document.querySelector(".container");
-
-const dummyLibrary = [
+const myLibrary = [
     {
-        title: 'Clean',
-        author: 'Kent',
-        pages: 21,
+        title: 'Clean Code',
+        author: 'Robert C. Martin',
+        pages: 462,
+        isRead: true,
     },
     {
-        title: "What do you do ?",
+        title: "TDD",
         author: 'Kent',
-        pages: 21,
+        pages: 217,
+        isRead: false
     },
 ];
+
+const container = document.querySelector(".container");
 
 const executeAction = (e, bookManager) => {
     e.preventDefault();
@@ -24,39 +25,55 @@ const executeAction = (e, bookManager) => {
     bookManager[action](book, e.target.dataset.id);
 }
 
-displayBooks(container, dummyLibrary);
-
 const bookManager = {
     readBook: readBook,
-    deleteBook: deleteBook
+    deleteBook: deleteBook,
+    addBook: addBook
 };
 
-const btns = document.querySelectorAll(".btn");
 const addBookBtn = document.querySelector("#add-book");
 const modal = document.querySelector("#add-book-modal");
 const cancelBtn = document.querySelector("#cancel");
 const saveBtn = document.querySelector("#save");
+const bookForm = document.querySelector("#add-book-form");
 
 const displayModal = (e) => {
     e.preventDefault();
-    modal.style.visibility = 'visible';
+    modal.showModal();
 }
 
 const hideModal = (e) => {
     e.preventDefault();
-    modal.style.visibility = 'hidden';
+    modal.close();
 }
 
-const saveBook = (e) => {
-    hideModal(e);
+const saveBook = (e, bookManager, formElement) => {
+    e.preventDefault();
+    const formData = Object.fromEntries(new FormData(formElement));
+    if (myLibrary.find((book) => book.title == formData.title)) {
+        alert('This book already exists');
+        return;
+    }
+    const book = new Book(formData);
+    bookManager.addBook(myLibrary, book);
+    modal.close();
+    displayLibrary(container, myLibrary);
 }
 
-btns.forEach((btn) => {
-    btn.addEventListener('click', (e) => { executeAction(e, bookManager) });
-});
+const displayLibrary = (container, myLibrary) => {
+    displayBooks(container, myLibrary);
+    const btns = document.querySelectorAll(".btn");
+    btns.forEach((btn) => {
+        btn.addEventListener('click', (e) => { executeAction(e, bookManager) });
+    });
+}
+
+displayLibrary(container, myLibrary);
+
 addBookBtn.addEventListener('click', displayModal);
 cancelBtn.addEventListener('click', hideModal);
-saveBtn.addEventListener('click', saveBook);
+saveBtn.addEventListener('click', (e) => { saveBook(e, bookManager, bookForm) });
+
 
 
 
