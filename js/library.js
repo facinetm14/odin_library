@@ -64,10 +64,10 @@ const findBook = (myLibrary, title) => {
 };
 
 const bookManager = {
-    readBook: readBook,
-    deleteBook: deleteBook,
-    addBook: addBook,
-    findBook: findBook,
+    readBook,
+    deleteBook,
+    addBook,
+    findBook,
 };
 
 export { displayBooks, bookManager };

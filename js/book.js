@@ -1,14 +1,15 @@
-function Book(data) {
+function createBook(data) {
     if (!data.title || !data.pages || !data.author) {
         throw new Error('All properties of book are required');
     }
-    this.title = data.title;
-    this.pages = data.pages;
-    this.author = data.author;
-    this.isRead = false;
+    const title = data.title;
+    const pages = data.pages;
+    const author = data.author;
+    let isRead = false;
     if (data.read_status && data.read_status == "on") {
-        this.isRead = true;
+        isRead = true;
     }
+    return { title, pages, author, isRead };
 }
 
-export { Book };
+export { createBook };

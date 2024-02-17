@@ -1,5 +1,5 @@
 'use strict';
-import { Book } from './book.js';
+import { createBook } from './book.js';
 import { displayBooks, bookManager } from './library.js';
 
 const myLibrary = [
@@ -52,7 +52,7 @@ const saveBook = (e, bookManager, formElement) => {
     }
 
     try {
-        const book = new Book(formData);
+        const book = createBook(formData);
         bookManager.addBook(myLibrary, book);
         modal.close();
         displayLibrary(container, myLibrary);
