@@ -20,7 +20,7 @@ There's no database, the books are stored in an array : ```myLibrary```
 </ul>
 
 ## Outcome
-Throughout this project, I played with the DOM and utilized ```FormData``` class to process form data without having to submit the form, which might be very useful for sending http request to an API endpoint while building a SPA (https://en.wikipedia.org/wiki/Single-page_application) for example. 
+Throughout this project, I created a modal form using ```<dialog></dialog> (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog)``` and utilized ```FormData``` class to process form data without having to submit the form, which might be very useful for sending http request to an API endpoint while building a SPA (https://en.wikipedia.org/wiki/Single-page_application) for example. 
 
 ## Feedback
 Do you have any feedback ? Yes, please.
