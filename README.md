@@ -2,7 +2,7 @@
 This project is from <a href="https://www.theodinproject.com/">TheOdinProject</a>. It consists of building a simple library.
 
 ## Preview
-https://facinetm14.github.io/Odin_library/
+https://facinetm14.github.io/odin_library/
 
 ## Technos
 <ul>
