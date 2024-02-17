@@ -1,6 +1,6 @@
 'use strict';
 import { Book } from './book.js';
-import { displayBooks, readBook, deleteBook, addBook } from './library.js';
+import { displayBooks, bookManager } from './library.js';
 
 const myLibrary = [
     {
@@ -25,12 +25,6 @@ const executeAction = (e, bookManager) => {
     bookManager[action](book, e.target.dataset.id);
 }
 
-const bookManager = {
-    readBook: readBook,
-    deleteBook: deleteBook,
-    addBook: addBook
-};
-
 const addBookBtn = document.querySelector("#add-book");
 const modal = document.querySelector("#add-book-modal");
 const cancelBtn = document.querySelector("#cancel");
@@ -47,17 +41,25 @@ const hideModal = (e) => {
     modal.close();
 }
 
+
+
 const saveBook = (e, bookManager, formElement) => {
     e.preventDefault();
     const formData = Object.fromEntries(new FormData(formElement));
-    if (myLibrary.find((book) => book.title == formData.title)) {
+    if (bookManager.findBook(myLibrary, formData.title)) {
         alert('This book already exists');
         return;
     }
-    const book = new Book(formData);
-    bookManager.addBook(myLibrary, book);
-    modal.close();
-    displayLibrary(container, myLibrary);
+
+    try {
+        const book = new Book(formData);
+        bookManager.addBook(myLibrary, book);
+        modal.close();
+        displayLibrary(container, myLibrary);
+    }
+    catch (error) {
+        alert(error);
+    }
 }
 
 const displayLibrary = (container, myLibrary) => {

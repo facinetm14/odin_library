@@ -59,9 +59,15 @@ const displayBooks = (listComp, bookList) => {
     });
 }
 
-export {
-    displayBooks,
-    readBook,
-    deleteBook,
-    addBook
+const findBook = (myLibrary, title) => {
+    return myLibrary.find((book) => book.title == title);
 };
+
+const bookManager = {
+    readBook: readBook,
+    deleteBook: deleteBook,
+    addBook: addBook,
+    findBook: findBook,
+};
+
+export { displayBooks, bookManager };
