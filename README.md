@@ -12,7 +12,7 @@ https://facinetm14.github.io/Odin_library/
 </ul>
 
 ## Features
-There's no database, the books are stored in an array : ```js myLibrary```
+There's no database, the books are stored in an array : ```myLibrary```
 <ul>
   <li>display all booksfrom the library</li>
   <li>add a new book</li>
